@@ -5,7 +5,7 @@
 ;; Author: Joseph Wilk <joe@josephwilk.net>
 ;; URL: http://www.github.com/repl-electric/sonic-pi.el
 ;; Version: 0.1.0
-;; Package-Requires: ((cl-lib "0.5") (osc "0.1") (dash "2.2.0") (emacs "24"))
+;; Package-Requires: ((cl-lib "0.5") (osc "0.1") (dash "2.2.0") (emacs "24") (highlight "0"))
 ;; Keywords: SonicPi, Ruby
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -54,8 +54,9 @@
   :type 'string
   :group 'sonic-pi)
 
-(defvar sonic-pi-server-bin             "app/server/bin/sonic-pi-server.rb")
-(defvar sonic-pi-compile-extensions-bin "app/server/bin/compile-extensions.rb")
+(defvar sonic-pi-server-bin             "server/bin/sonic-pi-server.rb")
+(defvar sonic-pi-compile-extensions-bin "server/bin/compile-extensions.rb")
+(defvar sonic-pi-margin-size 1)
 
 (defun sonic-pi-server-cmd () (format "%s%s" sonic-pi-path sonic-pi-server-bin))
 
@@ -91,6 +92,7 @@
            "sonic-pi-server"
            "*sonic-pi-server-messages*"
            cmd)))
+    (set-window-margins (get-buffer-window) sonic-pi-margin-size)
     (sonic-pi-connect)
     (message "Ready!")))
 
